@@ -3,13 +3,14 @@ package kvizi;
 
 public class Kviz1 {
     public static void main(String[] args){
-        jeFibonaccijevo(34);
+
     }
     static void java(){
-        System.out.println("   J    a   v     v  a\n"
-                + "   J   a a   v   v  a a\n"
-                + "J  J  aaaaa   V V  aaaaa\n"
-                + " JJ  a     a   V  a     a");
+        System.out.println("""
+                   J    a   v     v  a
+                   J   a a   v   v  a a
+                J  J  aaaaa   V V  aaaaa
+                 JJ  a     a   V  a     a""");
     }
 
     static void kalkulator(int a, int b){
@@ -17,7 +18,7 @@ public class Kviz1 {
             System.out.println(a + " + " + b + " = " + (a + b));
             System.out.println(a + " - " + b + " = " + (a - b));
             System.out.println(a + " x " + b + " = " + (a * b));
-            System.out.println(a + " / " + b + " = " + (int)(a / b));
+            System.out.println(a + " / " + b + " = " + (a / b));
             System.out.println(a + " % " + b + " = " + (a % b));
         }
         else {
@@ -54,10 +55,10 @@ public class Kviz1 {
             double ploscina = Math.PI * Math.pow(r, 2);
             System.out.println("Obseg kroga s polmerom r="
                             + String.format("%.2f", r) + " je "
-                            + String.format("%." + d + "f", obseg));
+                            + String.format("%%.%df".formatted(d), obseg));
             System.out.println("Ploscina kroga s polmerom r="
                     + String.format("%.2f", r) + " je "
-                    + String.format("%." + d + "f", ploscina));
+                    + String.format("%%.%df".formatted(d), ploscina));
         }
     }
 
@@ -94,6 +95,7 @@ public class Kviz1 {
         System.out.println(vrstica3.repeat(n));
         System.out.println(vrstica4.repeat(n));
     }
+
     static boolean jeFibonaccijevo(int n){
         int f = 1;
         int fP = 1;
@@ -104,5 +106,17 @@ public class Kviz1 {
             if (f == n) {return true;}
         }
         return false;
+    }
+
+    static boolean jePrastevilo(int n){
+        if (n < 2){
+            return false;
+        }
+        for (int i = 2; i <= n/2; i++){
+            if (n%i == 0){
+                return false;
+            }
+        }
+        return true;
     }
 }
