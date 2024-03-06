@@ -1,6 +1,7 @@
 package kvizi;
 
 
+import java.text.Format;
 import java.util.ArrayList;
 
 public class Kviz1 {
@@ -245,5 +246,112 @@ public class Kviz1 {
             if (jePrastevilo(i) && jePrastevilo(i - 2))
                 System.out.println("("+(i-2)+", "+i+")");
         }
+    }
+
+    static void trikotnik(int n, int tip) {
+        StringBuilder[] sbs = new StringBuilder[n];
+        for (int i = 0; i < n; i++) {
+            sbs[i] = new StringBuilder();
+        }
+        if (tip != 7) {
+            for (int i = 0; i < n; i++) {
+                for (int j = 1; j <= i + 1; j++) {
+                    sbs[i].append(String.format("%-2d", j % 10));
+                }
+                sbs[i].deleteCharAt(sbs[i].length() - 1);
+            }
+        }
+        else {
+            int dolzina = 1;
+            for (int i = 0; i < n; i++) {
+                for (int j = i+1; j <=i+dolzina ; j++) {
+                    sbs[i].append(String.format("%-2d", j % 10));
+                }
+                sbs[i].deleteCharAt(sbs[i].length() - 1);
+                dolzina++;
+            }
+        }
+        switch (tip) {
+            case 1:
+                for (StringBuilder sb:sbs) {
+                    System.out.println(sb.toString());
+                }
+                break;
+            case 2:
+                for (int i=sbs.length-1;i>=0;i--) {
+                    System.out.printf("%"+(2*n-1)+"s\n",sbs[i].toString());
+                }
+                break;
+            case 3:
+                for (StringBuilder sb:sbs) {
+                    System.out.printf("%"+(2*n-1)+"s\n", sb.reverse());
+                }
+                break;
+            case 4:
+                for (int i=sbs.length-1;i>=0;i--) {
+                    System.out.printf("%-"+(2*n-1)+"s\n", sbs[i].reverse());
+                }
+                break;
+            case 5:
+            case 7:
+                for (StringBuilder sb:sbs) {
+                    System.out.printf("%"+(2*n-1)+"s%s\n",sb.toString(), sb.reverse().substring(1));
+                }
+                break;
+            case 6:
+                for (int i=sbs.length-1;i>=0;i--) {
+                    System.out.printf("%"+(2*n-1)+"s%s\n",sbs[i].toString(), sbs[i].reverse().substring(1));
+                }
+                break;
+        }
+    }
+
+    static void metulj(int n, int tip) {
+        StringBuilder[] sbs = new StringBuilder[n];
+        for (int i = 0; i < n; i++) {
+            sbs[i] = new StringBuilder();
+            for (int j = 1; j <= i + 1; j++) {
+                sbs[i].append(String.format("%-2d", j % 10));
+            }
+            sbs[i].deleteCharAt(sbs[i].length() - 1);
+            sbs[i].replace(0,sbs[i].length(),String.format("%-"+(n*2-1)+"s",sbs[i].toString()));
+            StringBuilder sb = new StringBuilder(sbs[i].toString());
+            sbs[i].append(sb.reverse().substring(1));
+        }
+        if (tip == 1) {
+            for (StringBuilder sb : sbs) {
+                System.out.println(sb.toString());
+            }
+        }
+        else if (tip == 2) {
+            for (int i = sbs.length-1; i >= 0; i--) {
+                System.out.println(sbs[i].toString());
+            }
+        }
+        else {
+            for (StringBuilder sb : sbs) {
+                System.out.println(sb.toString());
+            }
+            for (int i = sbs.length-2; i >= 0; i--) {
+                System.out.println(sbs[i].toString());
+            }
+
+        }
+    }
+
+    static void veckratnikDelitelj(int a, int b) {
+        if (Math.min(Math.abs(a),Math.abs(b)) == 0) {
+            System.out.println("Napaka: obe števili morata biti različni od nič.");
+            return;
+        }
+        System.out.printf("Največji skupni delitelj je %d.\n", gcd(a, b));
+        System.out.printf("Najmanjši skupni večkratnik je %d.\n", Math.abs(a*b) / gcd(a, b));
+
+    }
+    static int gcd(int a, int b) {
+        if (b == 0) {
+            return a;
+        }
+        return gcd(b, a%b);
     }
 }
