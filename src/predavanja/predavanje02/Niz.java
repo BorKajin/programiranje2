@@ -14,6 +14,6 @@ public class Niz {
         System.out.printf("Število besed:      %d\n", niz.split(" +").length);
         System.out.printf("Celotna dolžina:    %d\n", niz.length());
         System.out.printf("Obrnjen niz:        %s\n", sb.reverse().toString());
-
+        sc.close();
     }
 }

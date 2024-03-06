@@ -18,5 +18,6 @@ public class Obresti {
         koncniZnesek = glavnica * Math.pow(1+obrestnaMera/100, steviloLet);
         System.out.println("-----------------------");
         System.out.printf("Končni znesek: %.10f\n", koncniZnesek);
+        sc.close();
     }
 }
