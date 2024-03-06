@@ -27,6 +27,5 @@ bin/
 
 ### Mac OS ###
 .DS_Store
-/src/kvizi/a
-/src/predavanja/a
 /src/vaje/a
+/src/test.java
