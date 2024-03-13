@@ -2,6 +2,10 @@ package predavanja.predavanje02;
 
 public class Srecke {
     public static void main(String[] args) {
+        srecke();
+    }
+
+    private static void srecke() {
         int steviloVrstic = 10;
         System.out.println("Število srečk | Cena (EUR)");
         System.out.println("--------------------------");

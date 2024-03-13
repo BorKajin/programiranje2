@@ -4,11 +4,16 @@ import java.util.Scanner;
 
 public class Obresti {
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        obresti(sc);
+        sc.close();
+    }
+
+    private static void obresti(Scanner sc) {
         double obrestnaMera;
         double steviloLet;
         double glavnica;
         double koncniZnesek;
-        Scanner sc = new Scanner(System.in);
         System.out.print("Obrestna mera: ");
         obrestnaMera = sc.nextDouble();
         System.out.print("Število let: ");
@@ -18,6 +23,5 @@ public class Obresti {
         koncniZnesek = glavnica * Math.pow(1+obrestnaMera/100, steviloLet);
         System.out.println("-----------------------");
         System.out.printf("Končni znesek: %.10f\n", koncniZnesek);
-        sc.close();
     }
 }
