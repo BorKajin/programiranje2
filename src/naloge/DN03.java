@@ -1,4 +1,4 @@
-//package naloge;
+package naloge;
 
 import java.io.File;
 import java.util.Random;
@@ -22,6 +22,7 @@ public class DN03 {
             for (int i = 0; i < besede.length; i++) {
                 besede[i]=sc.next();
             }
+            sc.close();
         }catch (Exception e) {
             System.out.print("Napaka pri delu z datoteko");
             System.exit(3);
