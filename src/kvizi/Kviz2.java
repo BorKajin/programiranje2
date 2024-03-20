@@ -25,4 +25,8 @@ public class Kviz2 {
     static int[] range(int a, int b, int c) {
         return null;
     }
+
+    static String prevod(String niz) {
+        return null;
+    }
 }
