@@ -9,20 +9,12 @@ public class DN03 {
         izpisiGeslo(args);
     }
     private static String[] preberiBesede(File f) {
-        Scanner sc = null;
-        try {
-            sc = new Scanner(f);
-        }catch (Exception e){
-            System.out.print("Datoteka ne obstaja");
-            System.exit(2);
-        }
         String[] besede = new String[0];
-        try{
+        try (Scanner sc = new Scanner(f)){
             besede = new String[sc.nextInt()];
             for (int i = 0; i < besede.length; i++) {
                 besede[i]=sc.next();
             }
-            sc.close();
         }catch (Exception e) {
             System.out.print("Napaka pri delu z datoteko");
             System.exit(3);
