@@ -12,9 +12,10 @@ public class DN04 {
         StringBuilder sb = new StringBuilder();
         while (!dvojiskiZapis.isEmpty()) {
             try {
-                char znak = (char)Integer.parseInt(dvojiskiZapis.substring(0,8),2);
+                int dolzina= Math.min(dvojiskiZapis.length(), 8);
+                char znak = (char)Integer.parseInt(dvojiskiZapis.substring(0, dolzina),2);
                 sb.append(znak);
-                dvojiskiZapis = dvojiskiZapis.substring(8);
+                dvojiskiZapis = dvojiskiZapis.substring(dolzina);
             } catch (Exception e) {
                 System.exit(1);
             }
