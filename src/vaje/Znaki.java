@@ -4,6 +4,7 @@ public class Znaki {
     public static final short[] kodeZnakov16bit = {(short) 0b1111100111111001, // A
             (short) 0b1100101011011010, // B
             (short) 0b1111100010001111, // C
+            (short) 0b1111100010001111, // Č
             (short) 0b1110100110011110, // D
             (short) 0b1111111010001111, // E
             (short) 0b1111100011101000, // F
@@ -20,6 +21,7 @@ public class Znaki {
             (short) 0b1111100110111111, // Q
             (short) 0b1111100111111010, // R
             (short) 0b1111100011110111, // S
+            (short) 0b1111100011110111, // Š
             (short) 0b1111010001000100, // T
             (short) 0b1001100110011111, // U
             (short) 0b1001100110010110, // V
@@ -27,6 +29,7 @@ public class Znaki {
             (short) 0b1001011001101001, // X
             (short) 0b1001100111110100, // Y
             (short) 0b1111001001001111, // Z
+            (short) 0b1111001001001111, // Ž
             (short) 0b0110100110010110, // 0
             (short) 0b0110001000101111, // 1
             (short) 0b1110001001001111, // 2
@@ -38,7 +41,9 @@ public class Znaki {
             (short) 0b1110101111010111, // 8
             (short) 0b1111100111110001, // 9
             (short) 0b1000100000001000, //!
+            (short) 0b0110100100100010, //?
             (short) 0b0000000000001000, //.
+            (short) 0b0000000010001000, //,
             (short) 0b0000000000000000, // presledek
     };
 
@@ -46,6 +51,7 @@ public class Znaki {
             0b0001100000100100010000100100001001111110010000100100001011100111L, //A
             0b1111110001000010010001000111111001000001010000010100000111111110L, //B
             0b0011110001000010100000011000000010000000100000010100001000111100L, //C
+            0b0011110000000000001111000100001010000000100000000100001000111100L, //Č
             0b1111110001000010010000010100000101000001010000010100001011111100L, //D
             0b1111111101000001010000000111110001000000010000000100000111111111L, //E
             0b1111111101000001010000010100100001111000010010000100000011100000L, //F
@@ -62,6 +68,7 @@ public class Znaki {
             0b0111111010000001100000011000000110000001100010010111111000001000L, //Q
             0b1111111001000001010000010100000101111110010001000100001011100111L, //R
             0b0111110110000011100000010111110000000010100000011100000110111110L, //S
+            0b0011110000000000001111000100001100110000000011001100001000111100L, //Š
             0b1111111110001001000010000000100000001000000010000000100000011100L, //T
             0b1110011110000001100000011000000110000001100000011000000101111110L, //U
             0b1110011101000010010000100100001000100010001001000001010000001000L, //V
@@ -69,6 +76,7 @@ public class Znaki {
             0b1110011101000010001001000001100000100100001001000100001011100111L, //X
             0b1110011101000010001001000001010000001000000010000000100000011100L, //Y
             0b1111111110000010100001000000100000010000001000010100000111111111L, //Z
+            0b0011110000000000111111110000001000001100001100000100000011111111L, //Ž
             0b0011110001000010100001011000100110010001101000010100001000111100L, //0
             0b0011000001010000000100000001000000010000000100000001000011111111L, //1
             0b0111111010000001000000010000011000011000011000011000000111111111L, //2
@@ -80,17 +88,19 @@ public class Znaki {
             0b0111111010000001100000010111111010000001100000011000000101111110L, //8
             0b0111111010000001100000011000000101111111000000011000000101111110L, //9
             0b1000000010000000100000001000000010000000100000000000000010000000L, //!
+            0b0011110001000010000000100000110000010000000100000000000000010000L, //?
             0b0000000000000000000000000000000000000000000000000000000010000000L, //.
+            0b0000000000000000000000000000000000000000000000001100000010000000L, //,
             0, //presledek
     };
     private static final char crnaPika = '⬛'; // črn kvadratek
     private static final char belaPika = '⬜'; // prazen (bel) kvadratek
 
     private static final char[] abeceda = {
-            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-            'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '!', '.', ' ',};
-    public static String izpisi16bit_old(short... nizZnakov) {
+            'A', 'B', 'C', 'Č', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+            'N', 'O', 'P', 'Q', 'R', 'S', 'Š', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'Ž',
+            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '!', '?', '.', ',', ' ',};
+    public static String vrni16bit(short... nizZnakov) {
         StringBuilder[] sbs = new StringBuilder[4];
         for (int i = 0; i < sbs.length; i++) {
             sbs[i] = new StringBuilder();
@@ -112,7 +122,7 @@ public class Znaki {
         return rez.toString();
     }
 
-    public static String izpisi64bit_old(long... nizZnakov) {
+    public static String vrni64bit(long... nizZnakov) {
         StringBuilder[] sbs = new StringBuilder[8];
         for (int i = 0; i < sbs.length; i++) {
             sbs[i] = new StringBuilder();
@@ -162,7 +172,7 @@ public class Znaki {
         izpisi64bit(nizZnakov);
     }
 
-    public static void izpisi16bit(short... nizZnakov) {
+    private static void izpisi16bit(short... nizZnakov) {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < nizZnakov.length; j++) {
                 short znak = nizZnakov[j];
@@ -177,7 +187,7 @@ public class Znaki {
         }
     }
 
-    public static void izpisi64bit(long... nizZnakov) {
+    private static void izpisi64bit(long... nizZnakov) {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < nizZnakov.length; j++) {
                 long znak = nizZnakov[j];
@@ -189,6 +199,14 @@ public class Znaki {
                 System.out.print(j < (nizZnakov.length - 1) ? crnaPika : "");
             }
             System.out.println();
+        }
+    }
+
+    public static void izpisi(int velikost, String niz) {
+        if (velikost==4){
+            izpisi64bit(niz);
+        } else if (velikost==8) {
+            izpisi64bit(niz);
         }
     }
 }
