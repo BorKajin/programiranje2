@@ -1,14 +1,12 @@
 package kvizi;
 
 
-import java.text.Format;
-import java.util.ArrayList;
-
 public class Kviz1 {
     public static void main(String[] args) {
 
     }
-    static void java() {
+
+    public static void java() {
         System.out.println("""
                    J    a   v     v  a
                    J   a a   v   v  a a
@@ -16,20 +14,19 @@ public class Kviz1 {
                  JJ  a     a   V  a     a""");
     }
 
-    static void kalkulator(int a, int b) {
+    public static void kalkulator(int a, int b) {
         if (b != 0) {
             System.out.println(a + " + " + b + " = " + (a + b));
             System.out.println(a + " - " + b + " = " + (a - b));
             System.out.println(a + " x " + b + " = " + (a * b));
             System.out.println(a + " / " + b + " = " + (a / b));
             System.out.println(a + " % " + b + " = " + (a % b));
-        }
-        else {
+        } else {
             System.out.println("Napaka: deljenje z 0");
         }
     }
 
-    static void nicli(int a, int b, int c) {
+    public static void nicli(int a, int b, int c) {
         if (b % a == 0 && c % a == 0) {
             b /= a;
             c /= a;
@@ -38,34 +35,32 @@ public class Kviz1 {
         double D = Math.pow(b, 2) - 4 * a * c;
         if (D < 0) {
             System.out.println("Napaka: nicli enacbe ne obstajata");
-        }
-        else {
+        } else {
             double x1 = (-b + Math.sqrt(D)) / 2;
             double x2 = (-b - Math.sqrt(D)) / 2;
             System.out.println("x1=" + String.format("%.2f", x1)
-                            + ", x2=" + String.format("%.2f", x2));
+                    + ", x2=" + String.format("%.2f", x2));
         }
     }
 
-    static void krog(double r, int d) {
+    public static void krog(double r, int d) {
         if (r < 0) {
             System.out.println("Napaka: negativen polmer");
         } else if (d < 0) {
             System.out.println("Napaka: negativen d");
-        }
-        else {
+        } else {
             double obseg = 2 * Math.PI * r;
             double ploscina = Math.PI * Math.pow(r, 2);
             System.out.println("Obseg kroga s polmerom r="
-                            + String.format("%.2f", r) + " je "
-                            + String.format("%%.%df".formatted(d), obseg));
+                    + String.format("%.2f", r) + " je "
+                    + String.format("%%.%df".formatted(d), obseg));
             System.out.println("Ploscina kroga s polmerom r="
                     + String.format("%.2f", r) + " je "
                     + String.format("%%.%df".formatted(d), ploscina));
         }
     }
 
-    static String pretvoriSekunde(int sekunde) {
+    public static String pretvoriSekunde(int sekunde) {
         if (sekunde < 0) {
             return "Število sekund ne more biti negativno";
         }
@@ -84,13 +79,13 @@ public class Kviz1 {
                 + String.format("%02d", sekunde);
     }
 
-    static int pretvoriVSekunde(String cas) {
+    public static int pretvoriVSekunde(String cas) {
         return Integer.parseInt(cas.split(":")[2]) +
                 (Integer.parseInt(cas.split(":")[1]) +
-                        Integer.parseInt(cas.split(":")[0])*60)*60;
+                        Integer.parseInt(cas.split(":")[0]) * 60) * 60;
     }
 
-    static void javaJavaJava(int n) {
+    public static void javaJavaJava(int n) {
         String vrstica1 = "     J    a   v     v  a   ";
         String vrstica2 = "     J   a a   v   v  a a  ";
         String vrstica3 = "  J  J  aaaaa   V V  aaaaa ";
@@ -105,49 +100,51 @@ public class Kviz1 {
         System.out.println(vrstica4.repeat(n));
     }
 
-    static boolean jeFibonaccijevo(int n) {
+    public static boolean jeFibonaccijevo(int n) {
         int f = 1;
         int fP = 1;
         while (f <= n) {
             int temp = fP;
             fP = f;
             f += temp;
-            if (f == n) {return true;}
+            if (f == n) {
+                return true;
+            }
         }
         return false;
     }
 
-    static boolean jePrastevilo(int n) {
+    public static boolean jePrastevilo(int n) {
         if (n < 2) {
             return false;
         }
-        for (int i = 2; i <= n/2; i++) {
-            if (n%i == 0) {
+        for (int i = 2; i <= n / 2; i++) {
+            if (n % i == 0) {
                 return false;
             }
         }
         return true;
     }
 
-    static void izrisiZastavo(int n) {
-        for (int i=0;i<5*n;i++) {
-            for (int j=0;j<15*n +1;j++) {
-                if (i < 3*n) {
-                    if (j < 4*n - 1) {
-                        boolean zvezdica = (j%2 == 0);
-                        if (i%2 != 0)
+    public static void izrisiZastavo(int n) {
+        for (int i = 0; i < 5 * n; i++) {
+            for (int j = 0; j < 15 * n + 1; j++) {
+                if (i < 3 * n) {
+                    if (j < 4 * n - 1) {
+                        boolean zvezdica = (j % 2 == 0);
+                        if (i % 2 != 0)
                             zvezdica = !zvezdica;
                         if (zvezdica) {
                             System.out.print("*");
-                        }else {
+                        } else {
                             System.out.print(" ");
                         }
-                    } else if (j == 4*n - 1) {
+                    } else if (j == 4 * n - 1) {
                         System.out.print(" ");
-                    }else {
+                    } else {
                         System.out.print("=");
                     }
-                }else {
+                } else {
                     System.out.print("=");
                 }
             }
@@ -155,69 +152,68 @@ public class Kviz1 {
         }
     }
 
-    static void vDesetisko(int n) {
-        for (String s:Integer.toString(n).split("")) {
-            if(Integer.parseInt(s) >= 8) {
-                System.out.println("Število "+n+" ni število v osmiškem sistemu (števka "+s+")");
+    public static void vDesetisko(int n) {
+        for (String s : Integer.toString(n).split("")) {
+            if (Integer.parseInt(s) >= 8) {
+                System.out.println("Število " + n + " ni število v osmiškem sistemu (števka " + s + ")");
                 return;
             }
         }
-        System.out.println(n+"(8) = " + Integer.parseInt(""+n, 8) + "(10)");
+        System.out.println(n + "(8) = " + Integer.parseInt("" + n, 8) + "(10)");
     }
 
-    static String pretvoriVDesetisko(String n, int b) {
-        for (String s:n.split("")) {
-            try{
-                Integer.parseInt(s,b);
-            }
-            catch(NumberFormatException e) {
-                return "Napaka pri pretvorbi sistema - števka "+s;
+    public static String pretvoriVDesetisko(String n, int b) {
+        for (String s : n.split("")) {
+            try {
+                Integer.parseInt(s, b);
+            } catch (NumberFormatException e) {
+                return "Napaka pri pretvorbi sistema - števka " + s;
             }
         }
-        return n+"("+b+")=" + Integer.parseInt(n, b) + "(10)";
+        return n + "(" + b + ")=" + Integer.parseInt(n, b) + "(10)";
     }
 
-    static int vsotaPrvih(int n) {
+    public static int vsotaPrvih(int n) {
         int stevilo = 2;
         int vsota = 0;
         int stevec = 0;
-        while(stevec < n) {
-            if(jePrastevilo(stevilo)) {
+        while (stevec < n) {
+            if (jePrastevilo(stevilo)) {
                 vsota += stevilo;
-                stevec ++;
+                stevec++;
             }
-            stevilo ++;
+            stevilo++;
         }
 
         return vsota;
     }
 
-    static void pitagoroviTrojcki(int x) {
+    public static void pitagoroviTrojcki(int x) {
         int c = 1;
         int b = 1;
         for (int a = 1; a <= b; a++) {
             for (b = a; b <= c; b++) {
                 for (c = b; c <= x; c++) {
-                    if (a*a + b*b == c*c) {
-                        System.out.println(a+" "+b+" "+c);
+                    if (a * a + b * b == c * c) {
+                        System.out.println(a + " " + b + " " + c);
                     }
                 }
             }
         }
     }
 
-    static int[] stik(int[] tabela1, int[] tabela2) {
+    public static int[] stik(int[] tabela1, int[] tabela2) {
         int[] vsota = new int[tabela1.length + tabela2.length];
         System.arraycopy(tabela1, 0, vsota, 0, tabela1.length);
         System.arraycopy(tabela2, 0, vsota, tabela1.length, tabela2.length);
         return vsota;
     }
 
-    static int[] presek(int[] tab1, int[] tab2) {
+    public static int[] presek(int[] tab1, int[] tab2) {
         int[] temp = new int[tab1.length];
         int steviloSkupnih = 0;
-        for (int x1:tab1) {
-            for (int x2: tab2) {
+        for (int x1 : tab1) {
+            for (int x2 : tab2) {
                 if (x1 == x2) {
                     boolean vTabeli = false;
                     for (int i = 0; i < steviloSkupnih; i++) {
@@ -237,18 +233,18 @@ public class Kviz1 {
         return rez;
     }
 
-    static String izracunajRazliko(String cas1, String cas2) {
-        return pretvoriSekunde(Math.abs(pretvoriVSekunde(cas1)-pretvoriVSekunde(cas2)));
+    public static String izracunajRazliko(String cas1, String cas2) {
+        return pretvoriSekunde(Math.abs(pretvoriVSekunde(cas1) - pretvoriVSekunde(cas2)));
     }
 
-    static void praDvojcek(int n) {
+    public static void praDvojcek(int n) {
         for (int i = 2; i < n; i++) {
             if (jePrastevilo(i) && jePrastevilo(i - 2))
-                System.out.println("("+(i-2)+", "+i+")");
+                System.out.println("(" + (i - 2) + ", " + i + ")");
         }
     }
 
-    static void trikotnik(int n, int tip) {
+    public static void trikotnik(int n, int tip) {
         StringBuilder[] sbs = new StringBuilder[n];
         for (int i = 0; i < n; i++) {
             sbs[i] = new StringBuilder();
@@ -260,11 +256,10 @@ public class Kviz1 {
                 }
                 sbs[i].deleteCharAt(sbs[i].length() - 1);
             }
-        }
-        else {
+        } else {
             int dolzina = 1;
             for (int i = 0; i < n; i++) {
-                for (int j = i+1; j <=i+dolzina ; j++) {
+                for (int j = i + 1; j <= i + dolzina; j++) {
                     sbs[i].append(String.format("%-2d", j % 10));
                 }
                 sbs[i].deleteCharAt(sbs[i].length() - 1);
@@ -273,40 +268,40 @@ public class Kviz1 {
         }
         switch (tip) {
             case 1:
-                for (StringBuilder sb:sbs) {
+                for (StringBuilder sb : sbs) {
                     System.out.println(sb.toString());
                 }
                 break;
             case 2:
-                for (int i=sbs.length-1;i>=0;i--) {
-                    System.out.printf("%"+(2*n-1)+"s\n",sbs[i].toString());
+                for (int i = sbs.length - 1; i >= 0; i--) {
+                    System.out.printf("%" + (2 * n - 1) + "s\n", sbs[i].toString());
                 }
                 break;
             case 3:
-                for (StringBuilder sb:sbs) {
-                    System.out.printf("%"+(2*n-1)+"s\n", sb.reverse());
+                for (StringBuilder sb : sbs) {
+                    System.out.printf("%" + (2 * n - 1) + "s\n", sb.reverse());
                 }
                 break;
             case 4:
-                for (int i=sbs.length-1;i>=0;i--) {
-                    System.out.printf("%-"+(2*n-1)+"s\n", sbs[i].reverse());
+                for (int i = sbs.length - 1; i >= 0; i--) {
+                    System.out.printf("%-" + (2 * n - 1) + "s\n", sbs[i].reverse());
                 }
                 break;
             case 5:
             case 7:
-                for (StringBuilder sb:sbs) {
-                    System.out.printf("%"+(2*n-1)+"s%s\n",sb.toString(), sb.reverse().substring(1));
+                for (StringBuilder sb : sbs) {
+                    System.out.printf("%" + (2 * n - 1) + "s%s\n", sb.toString(), sb.reverse().substring(1));
                 }
                 break;
             case 6:
-                for (int i=sbs.length-1;i>=0;i--) {
-                    System.out.printf("%"+(2*n-1)+"s%s\n",sbs[i].toString(), sbs[i].reverse().substring(1));
+                for (int i = sbs.length - 1; i >= 0; i--) {
+                    System.out.printf("%" + (2 * n - 1) + "s%s\n", sbs[i].toString(), sbs[i].reverse().substring(1));
                 }
                 break;
         }
     }
 
-    static void metulj(int n, int tip) {
+    public static void metulj(int n, int tip) {
         StringBuilder[] sbs = new StringBuilder[n];
         for (int i = 0; i < n; i++) {
             sbs[i] = new StringBuilder();
@@ -314,7 +309,7 @@ public class Kviz1 {
                 sbs[i].append(String.format("%-2d", j % 10));
             }
             sbs[i].deleteCharAt(sbs[i].length() - 1);
-            sbs[i].replace(0,sbs[i].length(),String.format("%-"+(n*2-1)+"s",sbs[i].toString()));
+            sbs[i].replace(0, sbs[i].length(), String.format("%-" + (n * 2 - 1) + "s", sbs[i].toString()));
             StringBuilder sb = new StringBuilder(sbs[i].toString());
             sbs[i].append(sb.reverse().substring(1));
         }
@@ -322,36 +317,35 @@ public class Kviz1 {
             for (StringBuilder sb : sbs) {
                 System.out.println(sb.toString());
             }
-        }
-        else if (tip == 2) {
-            for (int i = sbs.length-1; i >= 0; i--) {
+        } else if (tip == 2) {
+            for (int i = sbs.length - 1; i >= 0; i--) {
                 System.out.println(sbs[i].toString());
             }
-        }
-        else {
+        } else {
             for (StringBuilder sb : sbs) {
                 System.out.println(sb.toString());
             }
-            for (int i = sbs.length-2; i >= 0; i--) {
+            for (int i = sbs.length - 2; i >= 0; i--) {
                 System.out.println(sbs[i].toString());
             }
 
         }
     }
 
-    static void veckratnikDelitelj(int a, int b) {
-        if (Math.min(Math.abs(a),Math.abs(b)) == 0) {
+    public static void veckratnikDelitelj(int a, int b) {
+        if (Math.min(Math.abs(a), Math.abs(b)) == 0) {
             System.out.println("Napaka: obe števili morata biti različni od nič.");
             return;
         }
         System.out.printf("Največji skupni delitelj je %d.\n", gcd(a, b));
-        System.out.printf("Najmanjši skupni večkratnik je %d.\n", Math.abs(a*b) / gcd(a, b));
+        System.out.printf("Najmanjši skupni večkratnik je %d.\n", Math.abs(a * b) / gcd(a, b));
 
     }
-    static int gcd(int a, int b) {
+
+    public static int gcd(int a, int b) {
         if (b == 0) {
             return a;
         }
-        return gcd(b, a%b);
+        return gcd(b, a % b);
     }
 }
