@@ -132,4 +132,16 @@ public class Kviz2 {
         System.out.println(s1.toString());
         System.out.println(s2.toString());
     }
+
+    public static String kodiraj(String niz, int odmik) {
+        StringBuilder rez = new StringBuilder();
+        for (int i = 0; i < niz.length(); i++) {
+            rez.append((char)(niz.charAt(i) + odmik));
+        }
+        return rez.toString();
+    }
+
+    public static String dekodiraj(String niz, int odmik) {
+        return kodiraj(niz, -odmik);
+    }
 }
