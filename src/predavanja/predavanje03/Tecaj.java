@@ -36,11 +36,11 @@ public class Tecaj {
                     minDatum = tempDatum;
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.print("Napaka pri delu z datoteko.");
             System.exit(3);
         }
-        System.out.printf("MIN tečaj: %12.4f (datum: %s)\n",min,minDatum);
-        System.out.printf("MAX tečaj: %12.4f (datum: %s)",max,maxDatum);
+        System.out.printf("MIN tečaj: %12.4f (datum: %s)\n", min, minDatum);
+        System.out.printf("MAX tečaj: %12.4f (datum: %s)", max, maxDatum);
     }
 }

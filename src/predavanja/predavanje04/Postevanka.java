@@ -10,7 +10,7 @@ public class Postevanka {
         int n;
         int a;
         int b;
-        try (Scanner sc = new Scanner(System.in)){
+        try (Scanner sc = new Scanner(System.in)) {
             System.out.print("Vnesi stevilo:");
             n = sc.nextInt();
             System.out.print("Vnesi spodnjo mejo:");
@@ -18,10 +18,11 @@ public class Postevanka {
             System.out.print("Vnesi zgornjo mejo:");
             b = sc.nextInt();
         }
-        try (PrintWriter pw = new PrintWriter("viri/postevanka.txt")){
+        try (PrintWriter pw = new PrintWriter("viri/postevanka.txt")) {
             for (int i = a; i <= b; i++) {
-                pw.printf("%d * %d = %d\n",i,n,i*n);
+                pw.printf("%d * %d = %d\n", i, n, i * n);
             }
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
     }
 }

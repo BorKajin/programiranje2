@@ -100,6 +100,7 @@ public class Znaki {
             'A', 'B', 'C', 'Č', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
             'N', 'O', 'P', 'Q', 'R', 'S', 'Š', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'Ž',
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '!', '?', '.', ',', ' ',};
+
     public static String vrni16bit(short... nizZnakov) {
         StringBuilder[] sbs = new StringBuilder[4];
         for (int i = 0; i < sbs.length; i++) {
@@ -145,8 +146,8 @@ public class Znaki {
     }
 
     public static void izpisi16bit(String niz, short... niz1) {
-        short[] rez = new short[niz.length()+niz1.length];
-        System.arraycopy(niz1,0,rez,niz.length(),niz1.length);
+        short[] rez = new short[niz.length() + niz1.length];
+        System.arraycopy(niz1, 0, rez, niz.length(), niz1.length);
         for (int i = 0; i < niz.length(); i++) {
             for (int j = 0; j < abeceda.length; j++) {
                 if (abeceda[j] == niz.toUpperCase().charAt(i) || abeceda[j] == ' ') {
@@ -159,8 +160,8 @@ public class Znaki {
     }
 
     public static void izpisi64bit(String niz, long... niz1) {
-        long[] nizZnakov = new long[niz.length()+niz1.length];
-        System.arraycopy(niz1,0,nizZnakov,niz.length(),niz1.length);
+        long[] nizZnakov = new long[niz.length() + niz1.length];
+        System.arraycopy(niz1, 0, nizZnakov, niz.length(), niz1.length);
         for (int i = 0; i < niz.length(); i++) {
             for (int j = 0; j < abeceda.length; j++) {
                 if (abeceda[j] == niz.toUpperCase().charAt(i) || abeceda[j] == ' ') {
@@ -203,9 +204,9 @@ public class Znaki {
     }
 
     public static void izpisi(int velikost, String niz) {
-        if (velikost==4){
+        if (velikost == 4) {
             izpisi64bit(niz);
-        } else if (velikost==8) {
+        } else if (velikost == 8) {
             izpisi64bit(niz);
         }
     }
