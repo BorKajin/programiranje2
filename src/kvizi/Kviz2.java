@@ -144,4 +144,42 @@ public class Kviz2 {
     public static String dekodiraj(String niz, int odmik) {
         return kodiraj(niz, -odmik);
     }
+
+    public static int[] nicleSpredaj(int[] tabela) {
+        int[] temp = new int[tabela.length];
+        int steviloElementov = 0;
+        for (int j : tabela) {
+            if (j != 0) {
+                temp[steviloElementov++] = j;
+            }
+        }
+        int[] rez = new int[tabela.length];
+        System.arraycopy(temp,0,rez,rez.length-steviloElementov,steviloElementov);
+        return rez;
+    }
+
+    public static int strStej(String niz, String podniz) {
+        if(!niz.contains(podniz)){
+            return 0;
+        }
+        return 1+ strStej(niz.substring(niz.indexOf(podniz)+podniz.length()),podniz);
+    }
+
+    public static double[][] zmnoziMatriki(double[][] a, double[][] b){
+        if(a[0].length != b.length) {
+            System.out.println("Tabeli nemoremo zmnožiti!");
+            return null;
+        }
+        double[][] c = new double[a.length][b[0].length];
+        for (int i = 0; i < c.length; i++) {
+            for (int j = 0; j < c[0].length; j++) {
+                double vsota = 0;
+                for (int n = 0; n < a[0].length; n++) {
+                    vsota += a[i][n]*b[n][j];
+                }
+                c[i][j]=vsota;
+            }
+        }
+        return c;
+    }
 }
