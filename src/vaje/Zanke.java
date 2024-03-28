@@ -1,6 +1,6 @@
 package vaje;
 
-public class V01_Zanke {
+public class Zanke {
     public static void main(String[] args) {
     }
 

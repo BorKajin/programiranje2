@@ -1,6 +1,6 @@
 package vaje;
 
-public class V02_Fakulteta {
+public class Fakulteta {
     public static void main(String[] args) {
         primerjavaL(5);
         primerjavaD(5);
