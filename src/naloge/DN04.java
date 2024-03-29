@@ -2,7 +2,7 @@ package naloge;
 
 public class DN04 {
     public static void main(String[] args) {
-        if (args.length < 1){
+        if (args.length < 1) {
             System.exit(1);
         }
         System.out.print(sestaviNiz(args[0]));
@@ -12,8 +12,8 @@ public class DN04 {
         StringBuilder sb = new StringBuilder();
         while (!dvojiskiZapis.isEmpty()) {
             try {
-                int dolzina= Math.min(dvojiskiZapis.length(), 8);
-                char znak = (char)Integer.parseInt(dvojiskiZapis.substring(0, dolzina),2);
+                int dolzina = Math.min(dvojiskiZapis.length(), 8);
+                char znak = (char) Integer.parseInt(dvojiskiZapis.substring(0, dolzina), 2);
                 sb.append(znak);
                 dvojiskiZapis = dvojiskiZapis.substring(dolzina);
             } catch (Exception e) {
