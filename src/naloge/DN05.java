@@ -2,33 +2,32 @@ package naloge;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class DN05 {
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws FileNotFoundException {
         if (args.length < 2) {
             System.exit(1);
         }
         switch (args[0]) {
             case "izpisi" -> izpisiSliko(preberiSliko(args[1]));
             case "histogram" -> histogram(preberiSliko(args[1]));
-            case "svetlost" -> izpisiSvetlost(preberiSliko(args[1]), args[1]);
+            case "svetlost" -> svetlostSlike(preberiSliko(args[1]), args[1]);
             case "zmanjsaj" -> izpisiSliko(zmanjsajSliko(preberiSliko(args[1])));
             case "rotiraj" -> izpisiSliko(rotirajSliko(preberiSliko(args[1])));
             case "zrcali" -> izpisiSliko(zrcaliSliko(preberiSliko(args[1])));
-            case "vrstica" -> izpisiMaxVrstico(poisciMaxVrstico(preberiSliko(args[1])));
+            case "vrstica" -> poisciMaxVrstico(izracunajMaxVrstico(preberiSliko(args[1])));
             case "barvna" -> izpisiBarvnoSliko(preberiBarvnoSliko(args[1]));
             case "sivinska" -> izpisiSliko(pretvoriVSivinsko(preberiBarvnoSliko(args[1])));
-            case "uredi" -> {
-                String[] imenaSlik = new String[args.length - 1];
-                System.arraycopy(args, 1, imenaSlik, 0, imenaSlik.length);
-                preberiVseInIzpisi(imenaSlik);
-            }
+            case "uredi" -> preberiVseInIzpisi(Arrays.copyOfRange(args, 1, args.length));
+            case "jedro" -> konvolucijaJedro(preberiSliko(args[1]));
+            case "glajenje" -> konvolucijaGlajenje(preberiSliko(args[1]));
+            case "robovi" -> konvolucijaRobovi(preberiSliko(args[1]));
         }
-
     }
-
 
     private static int[][] preberiSliko(String ime) {
         int[][] slika = null;
@@ -106,7 +105,7 @@ public class DN05 {
         }
     }
 
-    private static double svetlostSlike(int[][] slika) {
+    private static double izracunajSvetlost(int[][] slika) {
         int[] sivine = steviloSivin(slika);
         double povprecje = 0;
         for (int i = 0; i < sivine.length; i++) {
@@ -116,8 +115,8 @@ public class DN05 {
         return povprecje;
     }
 
-    public static void izpisiSvetlost(int[][] slika, String ime) {
-        System.out.printf("Srednja vrednost sivine na sliki %s je: %.2f", ime, svetlostSlike(slika));
+    public static void svetlostSlike(int[][] slika, String ime) {
+        System.out.printf("Srednja vrednost sivine na sliki %s je: %.2f", ime, izracunajSvetlost(slika));
     }
 
     private static int[][] zmanjsajSliko(int[][] slika) {
@@ -149,7 +148,7 @@ public class DN05 {
         return rez;
     }
 
-    private static int poisciMaxVrstico(int[][] slika) {
+    private static int izracunajMaxVrstico(int[][] slika) {
         int maxRazlika = 0;
         int maxVrstica = 0;
         for (int i = 0; i < slika[0].length; i++) {
@@ -165,7 +164,7 @@ public class DN05 {
         return maxVrstica + 1;
     }
 
-    private static void izpisiMaxVrstico(int vrstica) {
+    private static void poisciMaxVrstico(int vrstica) {
         System.out.printf("Max razlika svetlo - temno je v %d. vrstici.", vrstica);
     }
 
@@ -201,9 +200,9 @@ public class DN05 {
                     slika[j][i][0] = (naslednji >> 20) & maska;
                     slika[j][i][1] = (naslednji >> 10) & maska;
                     slika[j][i][2] = naslednji & maska;
-                    if (slika[j][i][2] > 1023 || slika[j][i][2] < 0 ||
-                            slika[j][i][1] > 1023 || slika[j][i][1] < 0 ||
-                            slika[j][i][0] > 1023 || slika[j][i][0] < 0) {
+                    if (slika[j][i][2] > 1023 || slika[j][i][2] < 0
+                            || slika[j][i][1] > 1023 || slika[j][i][1] < 0
+                            || slika[j][i][0] > 1023 || slika[j][i][0] < 0) {
                         System.out.println("Napaka: datoteka " + ime + " vsebuje podatke izven obsega 0 do 1023.");
                         System.exit(2);
                     }
@@ -243,7 +242,7 @@ public class DN05 {
     private static void preberiVseInIzpisi(String[] imenaSlik) {
         int[] svetlosti = new int[imenaSlik.length];
         for (int i = 0; i < svetlosti.length; i++) {
-            svetlosti[i] = (int) Math.round(svetlostSlike(preberiSliko(imenaSlik[i])));
+            svetlosti[i] = (int) Math.round(izracunajSvetlost(preberiSliko(imenaSlik[i])));
         }
         for (int i = 0; i < svetlosti.length; i++) {
             for (int j = 0; j < i; j++) {
@@ -260,6 +259,68 @@ public class DN05 {
         for (int i = 0; i < svetlosti.length; i++) {
             System.out.printf("%s (%d)\n", imenaSlik[i], svetlosti[i]);
         }
+    }
+
+    private static int[][] konvolucija(int[][] slika, double[][] jedro) {
+        int[][] rez = new int[slika.length - 2][slika[0].length - 2];
+        for (int i = 1; i < slika.length - 1; i++) {
+            for (int j = 1; j < slika[0].length - 1; j++) {
+                rez[i - 1][j - 1] = (int)
+                        (Math.round(slika[i - 1][j - 1] * jedro[0][0])
+                                + Math.round(slika[i - 1][j] * jedro[0][1])
+                                + Math.round(slika[i - 1][j + 1] * jedro[0][2])
+                                + Math.round(slika[i][j - 1] * jedro[1][0])
+                                + Math.round(slika[i][j] * jedro[1][1])
+                                + Math.round(slika[i][j + 1] * jedro[1][2])
+                                + Math.round(slika[i + 1][j - 1] * jedro[2][0])
+                                + Math.round(slika[i + 1][j] * jedro[2][1])
+                                + Math.round(slika[i + 1][j + 1] * jedro[2][2]));
+            }
+        }
+        return rez;
+    }
+
+    private static void konvolucijaJedro(int[][] slika) {
+        izpisiSliko(konvolucija(slika, new double[][]{{1, 1, 1}, {1, 1, 1}, {1, 1, 1}}));
+    }
+
+    private static int[][] razsiriSliko(int[][] slika) {
+        int[][] rez = new int[slika.length + 2][slika[0].length + 2];
+        for (int i = 0; i < slika.length; i++) {
+            System.arraycopy(slika[i], 0, rez[i + 1], 1, slika[0].length);
+        }
+        System.arraycopy(slika[0], 0, rez[0], 1, slika[0].length);
+        System.arraycopy(slika[slika.length - 1], 0, rez[rez.length - 1], 1, slika[0].length);
+        for (int i = 0; i < rez.length; i++) {
+            rez[i][0] = rez[i][1];
+            rez[i][rez[0].length - 1] = rez[i][rez[0].length - 2];
+        }
+        return rez;
+    }
+
+    private static void konvolucijaGlajenje(int[][] slika) {
+        izpisiSliko(konvolucija(razsiriSliko(slika), new double[][]{{1 / 16d, 1 / 8d, 1 / 16d}, {1 / 8d, 1 / 4d, 1 / 8d}, {1 / 16d, 1 / 8d, 1 / 16d}}));
+    }
+
+    private static void konvolucijaRobovi(int[][] slika) {
+        int[][] roboviNavpicno = konvolucija(razsiriSliko(slika), new double[][]{{1, 2, 1}, {0, 0, 0}, {-1, -2, -1}});
+        int[][] roboviVodoravno = konvolucija(razsiriSliko(slika), new double[][]{{1, 0, -1}, {2, 0, -2}, {1, 0, -1}});
+        int[][] roboviSkupaj = new int[slika.length][slika[0].length];
+        int[][] roboviKoncni = new int[slika.length][slika[0].length];
+        int maxVrednost = 0;
+        for (int i = 0; i < roboviSkupaj.length; i++) {
+            for (int j = 0; j < roboviSkupaj[0].length; j++) {
+                roboviSkupaj[i][j] = (int) Math.round(Math.sqrt(Math.pow(roboviNavpicno[i][j], 2) + Math.pow(roboviVodoravno[i][j], 2)));
+                if (roboviSkupaj[i][j] > maxVrednost)
+                    maxVrednost = roboviSkupaj[i][j];
+            }
+        }
+        for (int i = 0; i < roboviSkupaj.length; i++) {
+            for (int j = 0; j < roboviSkupaj[0].length; j++) {
+                roboviKoncni[i][j] = (int) Math.round(roboviSkupaj[i][j] * 255d / maxVrednost);
+            }
+        }
+        izpisiSliko(roboviKoncni);
     }
 
 }
