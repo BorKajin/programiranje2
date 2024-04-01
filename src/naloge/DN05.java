@@ -13,13 +13,18 @@ public class DN05 {
         switch (args[0]) {
             case "izpisi" -> izpisiSliko(preberiSliko(args[1]));
             case "histogram" -> histogram(preberiSliko(args[1]));
-            case "svetlost" -> svetlostSlike(preberiSliko(args[1]), args[1]);
+            case "svetlost" -> izpisiSvetlost(preberiSliko(args[1]), args[1]);
             case "zmanjsaj" -> izpisiSliko(zmanjsajSliko(preberiSliko(args[1])));
             case "rotiraj" -> izpisiSliko(rotirajSliko(preberiSliko(args[1])));
             case "zrcali" -> izpisiSliko(zrcaliSliko(preberiSliko(args[1])));
             case "vrstica" -> izpisiMaxVrstico(poisciMaxVrstico(preberiSliko(args[1])));
             case "barvna" -> izpisiBarvnoSliko(preberiBarvnoSliko(args[1]));
             case "sivinska" -> izpisiSliko(pretvoriVSivinsko(preberiBarvnoSliko(args[1])));
+            case "uredi" -> {
+                String[] imenaSlik = new String[args.length - 1];
+                System.arraycopy(args, 1, imenaSlik, 0, imenaSlik.length);
+                preberiVseInIzpisi(imenaSlik);
+            }
         }
 
     }
@@ -101,14 +106,18 @@ public class DN05 {
         }
     }
 
-    private static void svetlostSlike(int[][] slika, String ime) {
+    private static double svetlostSlike(int[][] slika) {
         int[] sivine = steviloSivin(slika);
         double povprecje = 0;
         for (int i = 0; i < sivine.length; i++) {
             povprecje += i * sivine[i];
         }
         povprecje /= slika.length * slika[0].length;
-        System.out.printf("Srednja vrednost sivine na sliki %s je: %.2f", ime, povprecje);
+        return povprecje;
+    }
+
+    public static void izpisiSvetlost(int[][] slika, String ime) {
+        System.out.printf("Srednja vrednost sivine na sliki %s je: %.2f", ime, svetlostSlike(slika));
     }
 
     private static int[][] zmanjsajSliko(int[][] slika) {
@@ -229,6 +238,28 @@ public class DN05 {
             }
         }
         return sivinska;
+    }
+
+    private static void preberiVseInIzpisi(String[] imenaSlik) {
+        int[] svetlosti = new int[imenaSlik.length];
+        for (int i = 0; i < svetlosti.length; i++) {
+            svetlosti[i] = (int) Math.round(svetlostSlike(preberiSliko(imenaSlik[i])));
+        }
+        for (int i = 0; i < svetlosti.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (svetlosti[i] > svetlosti[j] || (svetlosti[i] == svetlosti[j] && imenaSlik[i].compareToIgnoreCase(imenaSlik[j]) < 0)) {
+                    String tempIme = imenaSlik[i];
+                    int tempSvetlost = svetlosti[i];
+                    svetlosti[i] = svetlosti[j];
+                    imenaSlik[i] = imenaSlik[j];
+                    imenaSlik[j] = tempIme;
+                    svetlosti[j] = tempSvetlost;
+                }
+            }
+        }
+        for (int i = 0; i < svetlosti.length; i++) {
+            System.out.printf("%s (%d)\n", imenaSlik[i], svetlosti[i]);
+        }
     }
 
 }
