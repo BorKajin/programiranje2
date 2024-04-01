@@ -10,11 +10,14 @@ public class DN05 {
         if (args.length < 2) {
             System.exit(1);
         }
-        int[][] slika = preberiSliko(args[1]);
         switch (args[0]) {
-            case "izpisi" -> izpisiSliko(slika);
-            case "histogram" -> histogram(slika);
-            case "svetlost" -> svetlostSlike(slika, args[1]);
+            case "izpisi" -> izpisiSliko(preberiSliko(args[1]));
+            case "histogram" -> histogram(preberiSliko(args[1]));
+            case "svetlost" -> svetlostSlike(preberiSliko(args[1]), args[1]);
+            case "zmanjsaj" -> izpisiSliko(zmanjsajSliko(preberiSliko(args[1])));
+            case "rotiraj" -> izpisiSliko(rotirajSliko(preberiSliko(args[1])));
+            case "zrcali" -> izpisiSliko(zrcaliSliko(preberiSliko(args[1])));
+            case "vrstica" -> izpisiMaxVrstico(poisciMaxVrstico(preberiSliko(args[1])));
         }
 
     }
@@ -104,6 +107,55 @@ public class DN05 {
         }
         povprecje /= slika.length * slika[0].length;
         System.out.printf("Srednja vrednost sivine na sliki %s je: %.2f", ime, povprecje);
+    }
+
+    private static int[][] zmanjsajSliko(int[][] slika) {
+        if (slika.length < 3 || slika[0].length < 3) return slika;
+        int[][] rez = new int[slika.length / 2][slika[0].length / 2];
+        for (int i = 0; i < rez.length; i++) {
+            for (int j = 0; j < rez[0].length; j++) {
+                rez[i][j] = (slika[i * 2][j * 2] + slika[i * 2 + 1][j * 2] + slika[i * 2][j * 2 + 1] + slika[i * 2 + 1][j * 2 + 1]) / 4;
+            }
+        }
+        return rez;
+    }
+
+    private static int[][] rotirajSliko(int[][] slika) {
+        int[][] rez = new int[slika[0].length][slika.length];
+        for (int i = 0; i < rez.length; i++) {
+            for (int j = 0; j < rez[0].length; j++) {
+                rez[rez.length - (i + 1)][j] = slika[j][i];
+            }
+        }
+        return rez;
+    }
+
+    private static int[][] zrcaliSliko(int[][] slika) {
+        int[][] rez = new int[slika.length][slika[0].length];
+        for (int i = 0; i < rez.length; i++) {
+            System.arraycopy(slika[i], 0, rez[rez.length - (i + 1)], 0, rez[0].length);
+        }
+        return rez;
+    }
+
+    private static int poisciMaxVrstico(int[][] slika) {
+        int maxRazlika = 0;
+        int maxVrstica = 0;
+        for (int i = 0; i < slika[0].length; i++) {
+            for (int[] stolpec1 : slika) {
+                for (int[] stolpec2 : slika) {
+                    if (Math.abs(stolpec1[i] - stolpec2[i]) > maxRazlika) {
+                        maxVrstica = i;
+                        maxRazlika = Math.abs(stolpec1[i] - stolpec2[i]);
+                    }
+                }
+            }
+        }
+        return maxVrstica + 1;
+    }
+
+    private static void izpisiMaxVrstico(int vrstica) {
+        System.out.printf("Max razlika svetlo - temno je v %d. vrstici.", vrstica);
     }
 
 }
