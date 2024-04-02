@@ -196,10 +196,9 @@ public class DN05 {
             for (int i = 0; i < slika[0].length; i++) {
                 for (int j = 0; j < slika.length; j++) {
                     int naslednji = sc.nextInt();
-                    int maska = 0b1111111111;
-                    slika[j][i][0] = (naslednji >> 20) & maska;
-                    slika[j][i][1] = (naslednji >> 10) & maska;
-                    slika[j][i][2] = naslednji & maska;
+                    slika[j][i][0] = (naslednji >> 20) & 1023;
+                    slika[j][i][1] = (naslednji >> 10) & 1023;
+                    slika[j][i][2] = naslednji & 1023;
                     if (slika[j][i][2] > 1023 || slika[j][i][2] < 0
                             || slika[j][i][1] > 1023 || slika[j][i][1] < 0
                             || slika[j][i][0] > 1023 || slika[j][i][0] < 0) {
@@ -265,16 +264,11 @@ public class DN05 {
         int[][] rez = new int[slika.length - 2][slika[0].length - 2];
         for (int i = 1; i < slika.length - 1; i++) {
             for (int j = 1; j < slika[0].length - 1; j++) {
-                rez[i - 1][j - 1] = (int)
-                        (Math.round(slika[i - 1][j - 1] * jedro[0][0])
-                                + Math.round(slika[i - 1][j] * jedro[0][1])
-                                + Math.round(slika[i - 1][j + 1] * jedro[0][2])
-                                + Math.round(slika[i][j - 1] * jedro[1][0])
-                                + Math.round(slika[i][j] * jedro[1][1])
-                                + Math.round(slika[i][j + 1] * jedro[1][2])
-                                + Math.round(slika[i + 1][j - 1] * jedro[2][0])
-                                + Math.round(slika[i + 1][j] * jedro[2][1])
-                                + Math.round(slika[i + 1][j + 1] * jedro[2][2]));
+                for (int k = 0; k < 3; k++) {
+                    for (int l = 0; l < 3; l++) {
+                        rez[i - 1][j - 1] += (int) Math.round(slika[i + k - 1][j + l - 1] * jedro[k][l]);
+                    }
+                }
             }
         }
         return rez;
