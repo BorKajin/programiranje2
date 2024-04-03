@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Risanje {
     public static void main(String[] args) {
-        ura();
+        graf(-Math.PI * 2, Math.PI * 2, -2, 2);
     }
 
     public static void tarca(double stranica, int steviloKrogov) {
@@ -95,7 +95,7 @@ public class Risanje {
         StdDraw.setPenRadius(0.01);
         StdDraw.setPenColor(Color.GREEN);
         StdDraw.enableDoubleBuffering();
-        while (true) {
+        while (!StdDraw.hasNextKeyTyped() || StdDraw.nextKeyTyped() != ' ') {
             StdDraw.clear(Color.BLACK);
             for (int i = 0; i < 3; i++) {
                 StdDraw.circle(0, 0, 10 + 20 * i);
@@ -119,7 +119,7 @@ public class Risanje {
         DateTimeFormatter f = DateTimeFormatter.ofPattern("HH:mm:ss");
         LocalDateTime cajt;
         StdDraw.enableDoubleBuffering();
-        while (true) {
+        while (!StdDraw.hasNextKeyTyped() || StdDraw.nextKeyTyped() != ' ') {
             StdDraw.clear();
             cajt = LocalDateTime.now();
             String cas = cajt.format(f);
@@ -150,5 +150,24 @@ public class Risanje {
             StdDraw.show();
             StdDraw.pause(1000);
         }
+    }
+
+    public static void graf(double X1, double X2, double Y1, double Y2) {
+        StdDraw.setScale(0, 200);
+        StdDraw.clear();
+        StdDraw.line(0, 200 * (-Y1) / (Y2 - Y1), 200, 200 * (-Y1) / (Y2 - Y1));
+        StdDraw.line(200 * (-X1) / (X2 - X1), 0, 200 * (-X1) / (X2 - X1), 200);
+        StdDraw.enableDoubleBuffering();
+        for (double i = 0; i < 200; i += 0.001) {
+            double x = (X2 - X1) * i / 200 + X1;
+            double y = Math.cos(x);
+            double j = 200 * (y - Y1) / (Y2 - Y1);
+            try {
+                StdDraw.line(i, j, i, j);
+
+            } catch (Exception ignored) {
+            }
+        }
+        StdDraw.show();
     }
 }
