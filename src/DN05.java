@@ -32,11 +32,13 @@ public class DN05 {
         try (Scanner sc = new Scanner(new File(ime))) {
             if (!sc.hasNextLine()) {
                 System.out.println("Napaka: Datoteka " + ime + " je prazna.");
+                sc.close();
                 System.exit(2);
             }
             String[] glava = sc.nextLine().split(" ");
             if (!glava[0].equals("P2:") || !glava[2].equals("x")) {
                 System.out.println("Napaka: datoteka " + ime + " ni v formatu P2.");
+                sc.close();
                 System.exit(2);
             }
             int sirina = 0, visina = 0;
@@ -45,10 +47,12 @@ public class DN05 {
                 visina = Integer.parseInt(glava[3]);
             } catch (NumberFormatException e) {
                 System.out.println("Napaka: datoteka " + ime + " ni v formatu P2 (velikost slike ni pravilna).");
+                sc.close();
                 System.exit(2);
             }
             if (sirina <= 0 || visina <= 0) {
                 System.out.println("Napaka: datoteka " + ime + " ni v formatu P2 (velikost slike je 0 ali negativna).");
+                sc.close();
                 System.exit(2);
             }
             slika = new int[sirina][visina];
@@ -57,6 +61,7 @@ public class DN05 {
                     int naslednji = sc.nextInt();
                     if (naslednji < 0 || naslednji > 255) {
                         System.out.println("Napaka: datoteka " + ime + " vsebuje podatke izven obsega 0 do 255.");
+                        sc.close();
                         System.exit(2);
                     }
                     slika[j][i] = naslednji;
@@ -171,11 +176,13 @@ public class DN05 {
         try (Scanner sc = new Scanner(new File(ime))) {
             if (!sc.hasNextLine()) {
                 System.out.println("Napaka: Datoteka " + ime + " je prazna.");
+                sc.close();
                 System.exit(2);
             }
             String[] glava = sc.nextLine().split(" ");
             if (!glava[0].equals("P2B:") || !glava[2].equals("x")) {
                 System.out.println("Napaka: datoteka " + ime + " ni v formatu P2.");
+                sc.close();
                 System.exit(2);
             }
             int sirina = 0, visina = 0;
@@ -184,10 +191,12 @@ public class DN05 {
                 visina = Integer.parseInt(glava[3]);
             } catch (NumberFormatException e) {
                 System.out.println("Napaka: datoteka " + ime + " ni v formatu P2 (velikost slike ni pravilna).");
+                sc.close();
                 System.exit(2);
             }
             if (sirina <= 0 || visina <= 0) {
                 System.out.println("Napaka: datoteka " + ime + " ni v formatu P2 (velikost slike je 0 ali negativna).");
+                sc.close();
                 System.exit(2);
             }
             slika = new int[sirina][visina][3];
@@ -201,6 +210,7 @@ public class DN05 {
                             || slika[j][i][1] > 1023 || slika[j][i][1] < 0
                             || slika[j][i][0] > 1023 || slika[j][i][0] < 0) {
                         System.out.println("Napaka: datoteka " + ime + " vsebuje podatke izven obsega 0 do 1023.");
+                        sc.close();
                         System.exit(2);
                     }
                 }
@@ -230,7 +240,7 @@ public class DN05 {
         int[][] sivinska = new int[slika.length][slika[0].length];
         for (int i = 0; i < sivinska.length; i++) {
             for (int j = 0; j < sivinska[0].length; j++) {
-                sivinska[i][j] = ((slika[i][j][0] + slika[i][j][1] + slika[i][j][2]) / 3) * 255 / 1023;
+                sivinska[i][j] = (int) Math.round((((slika[i][j][0] + slika[i][j][1] + slika[i][j][2]) / 3d) * (255 / 1023d)));
             }
         }
         return sivinska;
