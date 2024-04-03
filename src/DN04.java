@@ -1,5 +1,3 @@
-package naloge;
-
 public class DN04 {
     public static void main(String[] args) {
         if (args.length < 1) {
