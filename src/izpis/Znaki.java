@@ -1,4 +1,4 @@
-package vaje;
+package izpis;
 
 public class Znaki {
     public static final short[] kodeZnakov16bit = {(short) 0b1111100111111001, // A
