@@ -12,8 +12,7 @@ public class Seznam {
      * @return true, če je ustvarjen; false, če že obstaja
      */
     public static boolean narediSeznam(int n) {
-        if (seznam != null)
-            return false;
+        if (seznam != null) return false;
         seznam = new String[n];
         mestoVSeznamu = 0;
         return true;
@@ -26,8 +25,7 @@ public class Seznam {
      * @return true, če je element dodan; false, če seznam ne obstaja;
      */
     public static boolean dodajNaKonecSeznama(String element) {
-        if (seznam == null)
-            return false;
+        if (seznam == null) return false;
         if (mestoVSeznamu >= seznam.length) {
             String[] rez = new String[Math.max(seznam.length, 1) * 2];
             System.arraycopy(seznam, 0, rez, 0, seznam.length);
@@ -45,8 +43,7 @@ public class Seznam {
      * @return true, če je element vrinjen; false, če element ni vrinjen
      */
     public static boolean dodajVSeznam(String element, int mesto) {
-        if (seznam == null || mestoVSeznamu == seznam.length || mesto < 1)
-            return false;
+        if (seznam == null || mestoVSeznamu == seznam.length || mesto < 1) return false;
         if (mesto >= mestoVSeznamu) {
             return dodajNaKonecSeznama(element);
         }
@@ -65,8 +62,7 @@ public class Seznam {
      * @return odstranjen element; null, če element ni bil odstranjen
      */
     public static String odstraniIzSeznama(int mesto) {
-        if (seznam == null || --mesto >= mestoVSeznamu)
-            return null;
+        if (seznam == null || --mesto >= mestoVSeznamu) return null;
         String element = seznam[mesto];
         for (int i = mesto; i < mestoVSeznamu - 1; i++) {
             seznam[i] = seznam[i + 1];
@@ -126,8 +122,7 @@ public class Seznam {
      * @return true, če je seznam uničen; sicer false
      */
     public static boolean uniciSeznam() {
-        if (seznam == null)
-            return false;
+        if (seznam == null) return false;
         seznam = null;
         mestoVSeznamu = -1;
         return true;
