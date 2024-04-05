@@ -1,5 +1,3 @@
-import edu.princeton.cs.algs4.StdDraw;
-
 public class DN06 {
     public static void main(String[] args) {
         if (args.length == 0) {
@@ -11,6 +9,7 @@ public class DN06 {
 
     private static void izrisiSudoku(String arg) {
         StdDraw.setScale(0, 100);
+        StdDraw.enableDoubleBuffering();
         for (int i = 8; i >= 0; i--) {
             for (int j = 0; j < 9; j++) {
                 char znak = arg.charAt((8 - i) * 9 + j);
@@ -23,5 +22,6 @@ public class DN06 {
                 }
             }
         }
+        StdDraw.show();
     }
 }
