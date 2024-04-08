@@ -240,7 +240,7 @@ public class DN05 {
         int[][] sivinska = new int[slika.length][slika[0].length];
         for (int i = 0; i < sivinska.length; i++) {
             for (int j = 0; j < sivinska[0].length; j++) {
-                sivinska[i][j] = (int) Math.round((((slika[i][j][0] + slika[i][j][1] + slika[i][j][2]) / 3d) * (255 / 1023d)));
+                sivinska[i][j] = (((slika[i][j][0] + slika[i][j][1] + slika[i][j][2]) / 3) * 255 / 1023);
             }
         }
         return sivinska;
