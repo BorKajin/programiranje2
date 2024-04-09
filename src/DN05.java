@@ -203,16 +203,9 @@ public class DN05 {
             for (int i = 0; i < slika[0].length; i++) {
                 for (int j = 0; j < slika.length; j++) {
                     int naslednji = sc.nextInt();
-                    slika[j][i][0] = (naslednji >> 20) & 1023;
-                    slika[j][i][1] = (naslednji >> 10) & 1023;
+                    slika[j][i][0] = (naslednji >>> 20) & 1023;
+                    slika[j][i][1] = (naslednji >>> 10) & 1023;
                     slika[j][i][2] = naslednji & 1023;
-                    if (slika[j][i][2] > 1023 || slika[j][i][2] < 0
-                            || slika[j][i][1] > 1023 || slika[j][i][1] < 0
-                            || slika[j][i][0] > 1023 || slika[j][i][0] < 0) {
-                        System.out.println("Napaka: datoteka " + ime + " vsebuje podatke izven obsega 0 do 1023.");
-                        sc.close();
-                        System.exit(2);
-                    }
                 }
             }
 
