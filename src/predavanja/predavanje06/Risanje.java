@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Risanje {
     public static void main(String[] args) {
-        graf(-Math.PI * 2, Math.PI * 2, -2, 2);
+        graf(-10, 10, -20, 2, 0.1);
     }
 
     public static void tarca(double stranica, int steviloKrogov) {
@@ -108,9 +108,15 @@ public class Risanje {
     }
 
     private static void kazalec(double r, double kot) {
+        kazalec(r, kot, 0.002);
+    }
+
+    private static void kazalec(double r, double kot, double debelina) {
+        StdDraw.setPenRadius(debelina);
         double x = r * Math.cos(Math.toRadians(kot));
         double y = r * Math.sin(Math.toRadians(kot));
         StdDraw.line(0, 0, x, y);
+        StdDraw.setPenRadius();
     }
 
     public static void ura() {
@@ -123,50 +129,53 @@ public class Risanje {
             StdDraw.clear();
             cajt = LocalDateTime.now();
             String cas = cajt.format(f);
-            for (int i = 1; i <= 12; i++) {
-                double x = Math.cos(Math.toRadians(i * 30 - 90));
-                double y = -Math.sin(Math.toRadians(i * 30 - 90));
-                StdDraw.text(x * 60, y * 60, Integer.toString(i));
-            }
-            for (int i = 1; i <= 60; i++) {
-                if (i % 5 == 0) {
-                    StdDraw.setPenRadius(0.01);
-                } else {
-                    StdDraw.setPenRadius();
-                }
-                double x = Math.cos(Math.toRadians(i * 6));
-                double y = -Math.sin(Math.toRadians(i * 6));
-                StdDraw.line(x * 55, y * 55, x * 50, y * 50);
-            }
+            stevilcnica();
             StdDraw.text(-80, 90, cas);
-            StdDraw.setPenRadius(0.02);
-            kazalec(r - 15, -30 * Integer.parseInt(cas.split(":")[0]) + 90);
-            StdDraw.setPenRadius(0.01);
-            kazalec(r - 5, -6 * Integer.parseInt(cas.split(":")[1]) + 90);
-            StdDraw.setPenRadius();
+            int SS = cajt.getNano();
+            double ss = cajt.getSecond() + SS / 1000000000d;
+            double mm = cajt.getMinute() + ss / 60;
+            double hh = cajt.getHour() + mm / 60;
+            kazalec(r - 15, -30 * hh + 90, 0.02);
+            kazalec(r - 5, -6 * mm + 90, 0.01);
             StdDraw.setPenColor(Color.RED);
-            kazalec(r, -6 * Integer.parseInt(cas.split(":")[2]) + 90);
+            kazalec(r, -6 * ss + 90);
             StdDraw.setPenColor();
             StdDraw.show();
-            StdDraw.pause(1000);
+            StdDraw.pause(10);
         }
     }
 
-    public static void graf(double X1, double X2, double Y1, double Y2) {
+    private static void stevilcnica() {
+        for (int i = 0; i < 360; i += 6) {
+            if ((i - 90) % 30 == 0) {
+                double x = Math.cos(Math.toRadians(i - 60));
+                double y = -Math.sin(Math.toRadians(i - 60));
+                StdDraw.text(x * 60, y * 60, Integer.toString(i / 30 + 1));
+                StdDraw.setPenRadius(0.01);
+            }
+            double x = Math.cos(Math.toRadians(i));
+            double y = -Math.sin(Math.toRadians(i));
+            StdDraw.line(x * 55, y * 55, x * 50, y * 50);
+            StdDraw.setPenRadius();
+        }
+    }
+
+    public static void graf(double X1, double X2, double Y1, double Y2, double korak) {
         StdDraw.setScale(0, 200);
         StdDraw.clear();
         StdDraw.line(0, 200 * (-Y1) / (Y2 - Y1), 200, 200 * (-Y1) / (Y2 - Y1));
         StdDraw.line(200 * (-X1) / (X2 - X1), 0, 200 * (-X1) / (X2 - X1), 200);
         StdDraw.enableDoubleBuffering();
-        for (double i = 0; i < 200; i += 0.001) {
+        double pj = 0;
+        for (double i = 0; i <= 200; i += korak) {
             double x = (X2 - X1) * i / 200 + X1;
-            double y = Math.cos(x);
+            double y = Math.log(x);
             double j = 200 * (y - Y1) / (Y2 - Y1);
             try {
-                StdDraw.line(i, j, i, j);
-
+                StdDraw.line(i - korak, pj, i, j);
             } catch (Exception ignored) {
             }
+            pj = j;
         }
         StdDraw.show();
     }
