@@ -25,7 +25,7 @@ public class DN07 {
         double povrsina = 0;
         for (String ime : imenaPlanetov.split("[+]")) {
             for (Planet planet : planeti) {
-                if (ime.equalsIgnoreCase(planet.ime)) {
+                if (ime.equalsIgnoreCase(planet.getIme())) {
                     povrsina += planet.povrsina();
                     break;
                 }
@@ -37,8 +37,8 @@ public class DN07 {
 }
 
 class Planet {
-    String ime;
-    int radij;
+    private final String ime;
+    private final int radij;
 
     public Planet(String ime, int radij) {
         this.ime = ime;
@@ -47,5 +47,9 @@ class Planet {
 
     public double povrsina() {
         return 4 * Math.PI * Math.pow(radij, 2);
+    }
+
+    public String getIme() {
+        return ime;
     }
 }
