@@ -70,21 +70,21 @@ public class Kviz2 {
             c = (bit1 == '1' && bit2 == '1') || (c && (bit1 == '1' ^ bit2 == '1'));
             vsota.insert(0, rez);
         }
-        vsota.insert(0, c?'1':"");
+        vsota.insert(0, c ? '1' : "");
         return vsota.toString();
     }
-    
+
     public static int vsotaSkupnihCifer(int a, int b) {
-        int[] stevkeA = new int[(""+a).length()];
-        for (int i = 0; i < (""+a).length(); i++) {
-            stevkeA[i] = Integer.parseInt(""+(""+a).charAt(i));
+        int[] stevkeA = new int[("" + a).length()];
+        for (int i = 0; i < ("" + a).length(); i++) {
+            stevkeA[i] = Integer.parseInt("" + ("" + a).charAt(i));
         }
-        int[] stevkeB = new int[(""+b).length()];
-        for (int i = 0; i < (""+b).length(); i++) {
-            stevkeB[i] = Integer.parseInt(""+(""+b).charAt(i));
+        int[] stevkeB = new int[("" + b).length()];
+        for (int i = 0; i < ("" + b).length(); i++) {
+            stevkeB[i] = Integer.parseInt("" + ("" + b).charAt(i));
         }
         int vsota = 0;
-        for(int i:Kviz1.presek(stevkeA,stevkeB)){
+        for (int i : Kviz1.presek(stevkeA, stevkeB)) {
             vsota += i;
         }
         return vsota;
@@ -92,8 +92,8 @@ public class Kviz2 {
 
     public static String prevod(String niz) {
         boolean papajscina = true;
-        for (String s:niz.split("[^aeioup]")) {
-            if (!s.isEmpty() && !(s.matches("[aeiou]pap*")||s.equalsIgnoreCase("p"))){
+        for (String s : niz.split("[^aeioup]")) {
+            if (!s.isEmpty() && !(s.matches("[aeiou]pap*") || s.equalsIgnoreCase("p"))) {
                 papajscina = false;
                 break;
             }
@@ -107,7 +107,7 @@ public class Kviz2 {
                 if (!papajscina)
                     rez.append("pa");
                 else
-                    i+=2;
+                    i += 2;
             }
         }
         return rez.toString();
@@ -115,7 +115,7 @@ public class Kviz2 {
 
     public static String prepleti(String niz1, String niz2) {
         StringBuilder rez = new StringBuilder();
-        for (int i = 0; i < Math.max(niz1.length(),niz2.length()); i++) {
+        for (int i = 0; i < Math.max(niz1.length(), niz2.length()); i++) {
             rez.append((i < niz1.length()) ? niz1.charAt(i) : " ");
             rez.append((i < niz2.length()) ? niz2.charAt(i) : " ");
         }
@@ -125,18 +125,18 @@ public class Kviz2 {
     public static void odpleti(String niz) {
         StringBuilder s1 = new StringBuilder();
         StringBuilder s2 = new StringBuilder();
-        for (int i = 0; i < niz.length(); i+=2) {
+        for (int i = 0; i < niz.length(); i += 2) {
             s1.append(niz.charAt(i));
-            s2.append((i+1)<niz.length()?niz.charAt(i + 1):"");
+            s2.append((i + 1) < niz.length() ? niz.charAt(i + 1) : "");
         }
-        System.out.println(s1.toString());
-        System.out.println(s2.toString());
+        System.out.println(s1);
+        System.out.println(s2);
     }
 
     public static String kodiraj(String niz, int odmik) {
         StringBuilder rez = new StringBuilder();
         for (int i = 0; i < niz.length(); i++) {
-            rez.append((char)(niz.charAt(i) + odmik));
+            rez.append((char) (niz.charAt(i) + odmik));
         }
         return rez.toString();
     }
@@ -154,19 +154,19 @@ public class Kviz2 {
             }
         }
         int[] rez = new int[tabela.length];
-        System.arraycopy(temp,0,rez,rez.length-steviloElementov,steviloElementov);
+        System.arraycopy(temp, 0, rez, rez.length - steviloElementov, steviloElementov);
         return rez;
     }
 
     public static int strStej(String niz, String podniz) {
-        if(!niz.contains(podniz)){
+        if (!niz.contains(podniz)) {
             return 0;
         }
-        return 1+ strStej(niz.substring(niz.indexOf(podniz)+podniz.length()),podniz);
+        return 1 + strStej(niz.substring(niz.indexOf(podniz) + podniz.length()), podniz);
     }
 
-    public static double[][] zmnoziMatriki(double[][] a, double[][] b){
-        if(a[0].length != b.length) {
+    public static double[][] zmnoziMatriki(double[][] a, double[][] b) {
+        if (a[0].length != b.length) {
             System.out.println("Tabeli nemoremo zmnožiti!");
             return null;
         }
@@ -175,9 +175,9 @@ public class Kviz2 {
             for (int j = 0; j < c[0].length; j++) {
                 double vsota = 0;
                 for (int n = 0; n < a[0].length; n++) {
-                    vsota += a[i][n]*b[n][j];
+                    vsota += a[i][n] * b[n][j];
                 }
-                c[i][j]=vsota;
+                c[i][j] = vsota;
             }
         }
         return c;

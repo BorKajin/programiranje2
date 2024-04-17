@@ -1,8 +1,8 @@
 package predavanja.predavanje07;
 
 public class Student {
-    private String ime;
-    private int id;
+    private final String ime;
+    private final int id;
 
     public Student() {
         this(0, "");
