@@ -103,16 +103,16 @@ public class Seznam {
      */
     public static void izpisiSeznam64Bit() {
         if (seznam == null) {
-            izpis.Znaki.izpisi64bit("NAPAKA: Seznam ne obstaja.");
+            vaje.izpis.Znaki.izpisi64bit("NAPAKA: Seznam ne obstaja.");
             return;
         }
         if (mestoVSeznamu == 0) {
-            izpis.Znaki.izpisi64bit("Seznam je prazen (nima elementov).");
+            vaje.izpis.Znaki.izpisi64bit("Seznam je prazen (nima elementov).");
             return;
         }
-        izpis.Znaki.izpisi64bit("Na seznamu so naslednji elementi:");
+        vaje.izpis.Znaki.izpisi64bit("Na seznamu so naslednji elementi:");
         for (int i = 0; i < mestoVSeznamu; i++) {
-            izpis.Znaki.izpisi64bit((i + 1) + ". " + seznam[i]);
+            vaje.izpis.Znaki.izpisi64bit((i + 1) + ". " + seznam[i]);
         }
     }
 
