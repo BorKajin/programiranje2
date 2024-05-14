@@ -1,5 +1,6 @@
 package predavanja.predavanje04;
 
+@SuppressWarnings("unused")
 public class MnozicaZnakov {
 
     public static int getPraznaMnozica() {

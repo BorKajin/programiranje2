@@ -1,6 +1,6 @@
 package kvizi;
 
-
+@SuppressWarnings("unused")
 public class Kviz1 {
     public static void main(String[] args) {
 

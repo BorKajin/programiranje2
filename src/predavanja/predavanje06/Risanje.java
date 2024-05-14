@@ -6,6 +6,7 @@ import java.awt.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+@SuppressWarnings("unused")
 public class Risanje {
     public static void main(String[] args) {
         graf(-10, 10, -20, 2, 0.1);

@@ -1,7 +1,7 @@
 package zbirke;
 
-public abstract class Funkcija {
-    public abstract double vrednost(double x);
+public interface Funkcija {
+    double vrednost(double x);
 
-    public abstract double odvod(double x);
+    double odvod(double x);
 }

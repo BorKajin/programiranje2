@@ -3,6 +3,7 @@ package vaje.vinjete;
 import java.io.File;
 import java.util.Scanner;
 
+@SuppressWarnings("unused")
 public class SeznamVinjet {
     private Vinjeta[] prodaneVinjete;
 

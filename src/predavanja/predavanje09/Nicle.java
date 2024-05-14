@@ -23,7 +23,7 @@ public class Nicle {
     }
 }
 
-class Poli1 extends zbirke.Funkcija {
+class Poli1 implements zbirke.Funkcija {
 
     @Override
     public double vrednost(double x) {

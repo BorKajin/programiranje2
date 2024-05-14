@@ -1,5 +1,6 @@
 package vaje.izpis;
 
+@SuppressWarnings("unused")
 public class Znaki {
     public static final short[] kodeZnakov16bit = {(short) 0b1111100111111001, // A
             (short) 0b1100101011011010, // B

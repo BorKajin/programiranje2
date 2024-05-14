@@ -2,7 +2,7 @@ package predavanja.predavanje09;
 
 import zbirke.Funkcija;
 
-public class Sinus extends Funkcija {
+public class Sinus implements Funkcija {
 
     @Override
     public double vrednost(double x) {

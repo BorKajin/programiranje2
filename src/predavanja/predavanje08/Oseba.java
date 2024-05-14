@@ -1,5 +1,6 @@
 package predavanja.predavanje08;
 
+@SuppressWarnings("unused")
 public class Oseba {
     private String ime;
 

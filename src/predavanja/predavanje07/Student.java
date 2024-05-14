@@ -1,5 +1,6 @@
 package predavanja.predavanje07;
 
+@SuppressWarnings("unused")
 public class Student {
     private static final int MAX_OCEN = 10;
     private final int id;

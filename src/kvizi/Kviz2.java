@@ -1,9 +1,7 @@
 package kvizi;
 
+@SuppressWarnings("unused")
 public class Kviz2 {
-    public static void main(String[] args) {
-
-    }
 
     public static int vsotaStevk(String str) {
         int vsota = 0;

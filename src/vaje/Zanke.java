@@ -1,8 +1,7 @@
 package vaje;
 
+@SuppressWarnings("unused")
 public class Zanke {
-    public static void main(String[] args) {
-    }
 
     static void pravokotnikStevil(int sirina, int visina) {
         for (int i = 1; i <= visina; i++) {
